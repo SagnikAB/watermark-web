@@ -1,37 +1,33 @@
-const sharp = require("sharp");
+import sharp from "sharp";
 
-module.exports = async (req, res) => {
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
 
   try {
-    const buffers = [];
-
+    const chunks = [];
     for await (const chunk of req) {
-      buffers.push(chunk);
+      chunks.push(chunk);
+    }
+    const buffer = Buffer.concat(chunks);
+
+    // Find image bytes (JPEG / PNG)
+    const start = buffer.indexOf(Buffer.from([0xff, 0xd8])) !== -1
+      ? buffer.indexOf(Buffer.from([0xff, 0xd8]))
+      : buffer.indexOf(Buffer.from([0x89, 0x50, 0x4e, 0x47]));
+
+    if (start === -1) {
+      return res.status(400).send("Invalid image");
     }
 
-    const body = Buffer.concat(buffers);
-
-    // Expect multipart form-data, extract raw image
-    const boundary = req.headers["content-type"].split("boundary=")[1];
-    const parts = body.toString("binary").split(boundary);
-
-    let imageBuffer = null;
-
-    for (const part of parts) {
-      if (part.includes("Content-Type: image")) {
-        const start = part.indexOf("\r\n\r\n") + 4;
-        const end = part.lastIndexOf("\r\n");
-        imageBuffer = Buffer.from(part.slice(start, end), "binary");
-        break;
-      }
-    }
-
-    if (!imageBuffer) {
-      return res.status(400).send("No image found");
-    }
+    const imageBuffer = buffer.slice(start);
 
     const output = await sharp(imageBuffer)
       .png()
@@ -39,9 +35,8 @@ module.exports = async (req, res) => {
 
     res.setHeader("Content-Type", "image/png");
     res.status(200).send(output);
-
   } catch (err) {
     console.error(err);
-    res.status(500).send("Processing failed");
+    res.status(500).send("Image processing failed");
   }
-};
+}
