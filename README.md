@@ -30,7 +30,8 @@ Built with **Node.js, Express, Sharp**, and deployed on **Vercel**.
 
 ## 📸 Screenshots
 
-<img width="506" height="730" alt="Screenshot 2026-01-27 002738" src="https://github.com/user-attachments/assets/e608e4c6-66d0-4c35-b816-11188b1090fd" />
+<img width="510" height="525" alt="image" src="https://github.com/user-attachments/assets/52c8ee45-e7de-4929-815b-92838a29b121" />
+
 
 
 ---
@@ -51,3 +52,6 @@ git clone https://github.com/SagnikAB/watermark-web.git
 cd watermark-web
 npm install
 npx vercel dev
+
+## Author
+Sagnik Dam
