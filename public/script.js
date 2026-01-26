@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const preview = document.getElementById("preview");
   const darkToggle = document.getElementById("darkToggle");
 
-  // Restore dark mode
+  // Restore theme
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
   }
 
-  // Dark mode toggle
   darkToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     localStorage.setItem(
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  // Live image preview
+  // Live preview
   imageInput.addEventListener("change", () => {
     const file = imageInput.files[0];
     if (!file) return;
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsDataURL(file);
   });
 
-  // Handle form submit (ASYNC IS HERE ✅)
+  // Submit
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -44,21 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        alert(errorText);
+        alert(await response.text());
         return;
       }
 
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
 
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "watermarked.png";
-      link.click();
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "watermarked.png";
+      a.click();
     } catch (err) {
       console.error(err);
-      alert("Something went wrong. Check console.");
+      alert("Upload failed");
     }
   });
 });
