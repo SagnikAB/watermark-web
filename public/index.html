@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Image Watermark Tool</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Image Watermark Tool</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
+
+  <form id="uploadForm">
+
+    <input type="file" id="imageInput" accept="image/*" required>
+
+    <input type="text" id="watermarkText" placeholder="Watermark text">
+
+    <input type="file" id="logoInput" accept="image/*">
+
+    <select id="position">
+      <option value="southeast">Bottom Right</option>
+      <option value="southwest">Bottom Left</option>
+      <option value="center">Center</option>
+    </select>
+
+    <select id="size">
+      <option value="36">Small</option>
+      <option value="48" selected>Medium</option>
+      <option value="64">Large</option>
+    </select>
+
+    <label>
+      Opacity <input type="range" id="opacity" min="0.2" max="1" step="0.1" value="0.6">
+    </label>
+
+    <label>
+      <input type="checkbox" id="repeat"> Repeating diagonal watermark
+    </label>
+
+    <button type="submit">Add Watermark</button>
+  </form>
+
+  <img id="preview">
+  <a id="download" download="watermarked.png">Download</a>
+
+  <div id="stats"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
