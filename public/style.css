@@ -1,12 +1,16 @@
+/* ================= GLOBAL RESET ================= */
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
 
+/* ================= BODY & THEMES ================= */
 body {
   background: #f4f6fb;
   margin: 0;
   padding: 0;
+  color: #111;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.dark {
@@ -14,40 +18,163 @@ body.dark {
   color: white;
 }
 
+/* ================= CONTAINER ================= */
 .container {
-  max-width: 400px;
-  margin: 80px auto;
+  max-width: 420px;
+  margin: 60px auto;
   background: white;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 22px 18px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  transition: background 0.3s ease;
 }
 
 body.dark .container {
   background: #1e293b;
 }
 
+/* ================= HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 12px;
 }
 
-input, button {
+header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* ================= FORM CONTROLS ================= */
+input[type="file"],
+input[type="text"],
+input[type="range"],
+input[type="color"],
+button,
+select {
   width: 100%;
   margin-top: 10px;
   padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #111;
+  font-size: 14px;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
+body.dark input[type="file"],
+body.dark input[type="text"],
+body.dark select,
+body.dark button,
+body.dark input[type="range"],
+body.dark input[type="color"] {
+  background: #32506c;
+  border: 1px solid #475a72;
+  color: white;
+}
+
+input[type="text"]:focus,
+select:focus,
+input[type="range"]:focus,
+input[type="color"]:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+input[type="range"] {
+  accent-color: #2563eb;
+}
+
+/* ================= BUTTON ================= */
 button {
   background: #2563eb;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
 }
 
+button:hover {
+  background: #1d4ed8;
+}
+
+/* ================= PREVIEW IMAGE ================= */
 img {
   display: none;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 22px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+body.dark img {
+  border: 1px solid #475a72;
+}
+
+/* ================= DARK MODE TOGGLE ================= */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+#darkToggle {
+  display: none;
+}
+
+.toggle-label {
+  width: 60px;
+  height: 32px;
+  background: #d1d5db; /* default handle off */
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-label:hover {
+  filter: brightness(1.1);
+}
+
+.toggle-circle {
+  width: 26px;
+  height: 26px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: transform 0.3s ease;
+}
+
+/* Toggle OFF */
+#darkToggle:not(:checked) + .toggle-label {
+  background: #94a3b8;
+}
+
+/* Toggle ON */
+#darkToggle:checked + .toggle-label {
+  background: #22c55e;
+}
+
+#darkToggle:checked + .toggle-label .toggle-circle {
+  transform: translateX(28px);
+}
+
+/* ================= MISC / UTILITY ================= */
+label {
+  margin-top: 12px;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .container {
+    margin: 40px 10px;
+  }
 }
