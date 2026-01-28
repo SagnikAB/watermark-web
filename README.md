@@ -53,6 +53,6 @@ git clone https://github.com/SagnikAB/watermark-web.git
 cd watermark-web
 npm install
 npx vercel dev
-
+```
 ## Author
 Sagnik Dam
