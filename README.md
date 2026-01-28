@@ -30,7 +30,8 @@ Built with **Node.js, Express, Sharp**, and deployed on **Vercel**.
 
 ## 📸 Screenshots
 
-<img width="510" height="525" alt="image" src="https://github.com/user-attachments/assets/52c8ee45-e7de-4929-815b-92838a29b121" />
+<img width="482" height="627" alt="image" src="https://github.com/user-attachments/assets/4d2fe0f7-0e06-46cc-98eb-cb8a4c055a49" />
+
 
 
 
